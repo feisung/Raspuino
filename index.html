@@ -1,0 +1,36 @@
+<html>
+<head>
+<style type="text/css">
+body { max-width: 20em; } 
+</style>
+<script type="text/javascript">
+function button(value) {
+  if (window.XMLHttpRequest) {
+   request = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    try {
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+      try {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      } catch (e) {}
+    }
+  }
+  request.open('POST', '/arduino', true);
+  request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  request.setRequestHeader('Content-length', value.length);
+  request.setRequestHeader('Connection', 'close');
+  request.send('code=' + value);
+  return false;
+}
+</script>
+</head>
+<body>
+<h1>Welcome to Raspuino the Web Browser interface to controlling the Arduino via serial Connection
+</h1>
+<form name="remoteform" method="post">
+<input type="hidden" name="code">
+<input type="button" value="Turn LED on" onClick="button('a')" >
+<input type="button" value="Turn LED off" onClick="button('b')" >
+</form>
+<body>
